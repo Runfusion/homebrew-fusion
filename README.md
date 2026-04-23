@@ -4,6 +4,14 @@ Official Homebrew tap for [Fusion](https://runfusion.ai) — the multi-node AI a
 
 ## Install
 
+Easiest — one-line installer (picks Homebrew if available, falls back to npm):
+
+```bash
+curl -fsSL https://runfusion.ai/install.sh | sh
+```
+
+Or Homebrew directly:
+
 ```bash
 brew tap runfusion/fusion
 brew install fusion

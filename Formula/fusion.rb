@@ -1,8 +1,8 @@
 class Fusion < Formula
   desc "Fusion — AI-orchestrated task board. From rough idea to production code, automatically"
   homepage "https://runfusion.ai"
-  url "https://registry.npmjs.org/@runfusion/fusion/-/fusion-0.38.0.tgz"
-  sha256 "6add41869ae769c256f1e93da762a7cd25bca96126584edb603fdaec842a0687"
+  url "https://registry.npmjs.org/@runfusion/fusion/-/fusion-0.38.1.tgz"
+  sha256 "b58993cf33ca385308ffe7f1556d05a36db066ddd5f30bbdc371d17ef00d90ef"
   license "MIT"
 
   depends_on "node"

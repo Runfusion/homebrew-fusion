@@ -9,6 +9,17 @@ class Fusion < Formula
 
   def install
     system "npm", "install", *std_npm_args
+
+    # The bundled @mariozechner/clipboard-darwin-universal prebuilt addon ships
+    # with an absolute CI build path as its LC_ID_DYLIB and no Mach-O header
+    # padding, so Homebrew's relocation can't rewrite that ID. It is only a
+    # self-reference (Node dlopens the addon by path), so normalize it to a
+    # short @rpath name that fits the header, then re-sign ad-hoc.
+    Dir.glob("#{libexec}/**/clipboard.darwin-universal.node").each do |node|
+      MachO::Tools.change_dylib_id(node, "@rpath/#{File.basename(node)}")
+      system "codesign", "--force", "--sign", "-", node
+    end
+
     bin.install_symlink Dir["#{libexec}/bin/*"]
   end
 

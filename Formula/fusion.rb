@@ -7,6 +7,11 @@ class Fusion < Formula
 
   depends_on "node"
 
+  # Without this, Homebrew's relocation would expand the @rpath dylib ID set in
+  # `install` back to the long opt path, which doesn't fit the Mach-O header —
+  # the original "Failed to fix install linkage" failure.
+  preserve_rpath
+
   def install
     system "npm", "install", *std_npm_args
 

@@ -20,7 +20,10 @@ class Fusion < Formula
     # padding, so Homebrew's relocation can't rewrite that ID. It is only a
     # self-reference (Node dlopens the addon by path), so normalize it to a
     # short @rpath name that fits the header, then re-sign ad-hoc.
-    Dir.glob("#{libexec}/**/clipboard.darwin-universal.node").each do |node|
+    addons = Dir.glob("#{libexec}/**/clipboard.darwin-universal.node")
+    odie "clipboard.darwin-universal.node addon not found" if addons.empty?
+
+    addons.each do |node|
       MachO::Tools.change_dylib_id(node, "@rpath/#{File.basename(node)}")
       system "codesign", "--force", "--sign", "-", node
     end
